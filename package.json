@@ -1,0 +1,9 @@
+{
+  "name": "stream-api",
+  "version": "1.0.0",
+  "description": "Streaming API for sports channels",
+  "main": "api/stream.js",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
