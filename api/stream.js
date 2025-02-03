@@ -1,8 +1,6 @@
-const fetch = require('node-fetch');
-
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
     try {
-        // Extract channel ID from the URL
+        // Extract the channel ID from the URL query
         const { channel } = req.query;
         if (!channel) {
             return res.status(400).send("No channel specified. Use /api/stream?channel=yourChannelID");
@@ -13,8 +11,12 @@ module.exports = async (req, res) => {
 
         // Fetch the token
         const response = await fetch(playUrl, {
-            headers: { Referer: "https://sportstvn.com/" },
+            headers: { Referer: "https://sportstvn.com/" }, // Required header
         });
+
+        if (!response.ok) {
+            return res.status(500).send("Failed to fetch token.");
+        }
 
         const text = await response.text();
 
@@ -28,9 +30,9 @@ module.exports = async (req, res) => {
         const m3u8Url = `https://cdn.sturls.com/${channel}/index.m3u8?token=${encodeURIComponent(token)}`;
 
         // Redirect to the M3U8 URL
-        res.redirect(m3u8Url);
-
+        return res.redirect(m3u8Url);
     } catch (error) {
-        res.status(500).send("Error fetching stream.");
+        console.error("Error fetching stream:", error);
+        return res.status(500).send("Internal Server Error.");
     }
-};
+}
