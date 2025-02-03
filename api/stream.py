@@ -4,8 +4,12 @@ from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
-@app.get("/api/stream/{channel}.m3u8")
-async def get_stream(channel: str, request: Request):
+@app.get("/api/stream")
+async def get_stream(request: Request):
+    channel = request.query_params.get("id")  # Extract channel ID from query string
+    if not channel:
+        return {"error": "No channel specified. Use /api/stream?id=yourChannelID"}
+
     try:
         # Construct the play URL with the stream ID
         play_url = f"https://secureplayer.sportstvn.com/token.php?stream={channel}"
