@@ -1,6 +1,9 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/api/stream", "dest": "/api/stream.js" }
+    { "src": "/api/stream/(.*)", "dest": "/api/stream.py" }
+  ],
+  "builds": [
+    { "src": "api/stream.py", "use": "@vercel/python" }
   ]
 }
