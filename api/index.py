@@ -35,7 +35,7 @@ async def get_stream(request: Request):
             return {"error": "Token not found in the response."}
 
         token = match.group(1)
-        m3u8_url = f"https://cdn.sturls.com/{channel}/index.m3u8?token={token}"
+        m3u8_url = f"https://cdn.sturls.com/{channel}/index.mpd?token={token}"
 
         # Redirect the user to the new M3U8 URL
         return RedirectResponse(url=m3u8_url)
