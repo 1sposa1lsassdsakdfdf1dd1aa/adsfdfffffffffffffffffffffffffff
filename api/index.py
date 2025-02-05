@@ -6,18 +6,18 @@ app = FastAPI()
 
 @app.get("/api/stream")
 async def get_stream(request: Request):
-    # Define a list of channels and their details
+    # Define a list of channels and their details (name, id, logo)
     channels = [
-        {"name": "SSC | Extra 02", "id": "Extra02"},
-        {"name": "Sky Sport 03", "id": "SkySport03"},
-        {"name": "Sky Sport 02", "id": "SkySport02"},
-        {"name": "Sky Sport 01", "id": "SkySport01"},
-        {"name": "DAZN 02", "id": "DAZN02"},
-        {"name": "DAZN 01", "id": "DAZN01"},
-        {"name": "SSC 01", "id": "SSC1-SaudiArab"},
-        {"name": "BPL Special", "id": "BPLSpecial"},
-        {"name": "T Sports", "id": "TSports"},
-        {"name": "Sony Sports Ten 03", "id": "SonySportsTen03"}
+        {"name": "SSC | Extra 02", "id": "Extra02", "logo": "https://example.com/logos/extra02.png"},
+        {"name": "Sky Sport 03", "id": "SkySport03", "logo": "https://example.com/logos/skysport03.png"},
+        {"name": "Sky Sport 02", "id": "SkySport02", "logo": "https://example.com/logos/skysport02.png"},
+        {"name": "Sky Sport 01", "id": "SkySport01", "logo": "https://example.com/logos/skysport01.png"},
+        {"name": "DAZN 02", "id": "DAZN02", "logo": "https://example.com/logos/dazn02.png"},
+        {"name": "DAZN 01", "id": "DAZN01", "logo": "https://example.com/logos/dazn01.png"},
+        {"name": "SSC 01", "id": "SSC1-SaudiArab", "logo": "https://example.com/logos/ssc01.png"},
+        {"name": "BPL Special", "id": "BPLSpecial", "logo": "https://example.com/logos/bplspecial.png"},
+        {"name": "T Sports", "id": "TSports", "logo": "https://example.com/logos/tsports.png"},
+        {"name": "Sony Sports Ten 03", "id": "SonySportsTen03", "logo": "https://example.com/logos/sonysportsten03.png"}
     ]
 
     result = []
@@ -44,7 +44,7 @@ async def get_stream(request: Request):
                     link = f"https://cdn.sturls.com/{channel['id']}/index.mpd?token={token}&remote=no_check_ip"
                     result.append({
                         "name": channel["name"],
-                        "logo": "",  # Add the actual logo URL if available
+                        "logo": channel["logo"],
                         "url": f"https://sportstvn.com/channel/{channel['id'].lower()}/",
                         "stream_url": stream_url,
                         "link": link,
