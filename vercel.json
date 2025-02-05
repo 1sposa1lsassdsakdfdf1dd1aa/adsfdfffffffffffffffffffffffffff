@@ -1,7 +1,7 @@
 {
   "version": 2,
   "routes": [
-    { "src": "sports/playlist.m3u", "dest": "/api/index.py" }
+    { "src": "api/sports/playlist.m3u", "dest": "/api/index.py" }
   ],
   "builds": [
     { "src": "api/index.py", "use": "@vercel/python" }
