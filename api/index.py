@@ -4,7 +4,7 @@ import re
 
 app = FastAPI()
 
-@app.get("/api/playlist")
+@app.get("/api/playlist.m3u")
 async def get_stream(request: Request):
     # Define a list of channels and their details (name, id, logo)
     channels = [
